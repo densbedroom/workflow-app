@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Workflow Tracker</title>
+</head>
+<body>
+  <h1>Save My Workflow</h1>
+  <input type="text" id="title" placeholder="Workflow Title"><br>
+  <textarea id="progress" placeholder="Progress notes..."></textarea><br>
+  <button onclick="saveWorkflow()">Save</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    const SUPABASE_KEY = 'YOUR_SUPABASE_KEY';
+    const supabase = supabase.createClient(https://dwcfibsngxfnrjxdxqsn.supabase.co,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3Y2ZpYnNuZ3hmbnJqeGR4cXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1MTk5NDUsImV4cCI6MjA2MDA5NTk0NX0.Toacd_f-C1LUaD_EFI2sG6dqxJTxmbeNL389AuQHf38);
+
+    async function saveWorkflow() {
+      const title = document.getElementById('title').value;
+      const progress = document.getElementById('progress').value;
+
+      const { data, error } = await supabase.from('workflows').insert([
+        { title, progress }
+      ]);
+
+      if (error) {
+        alert("Error saving!");
+        console.log(error);
+      } else {
+        alert("Saved!");
+      }
+    }
+  </script>
+</body>
+</html>
